@@ -32,7 +32,11 @@ const Profile = () => {
            }
            {/* <input type='text'/> */}
           </div>
-          <div className='flex min-w-32 md:min-w-64'></div>
+          <div className='flex min-w-32 md:min-w-64 flex-col gap-5 text-white items-center justify-center'>
+            <div className='w-full'>
+              <input placeholder='Email' type="email" disabled value={userInfo.email} className='rounded-lg p-6 bg-[#2c2e3b]'/>
+            </div>
+          </div>
         </div>
       </div>
     </div>
