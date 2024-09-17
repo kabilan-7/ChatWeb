@@ -34,7 +34,7 @@ const Profile = () => {
           </div>
           <div className='flex min-w-32 md:min-w-64 flex-col gap-5 text-white items-center justify-center'>
             <div className='w-full'>
-              <input placeholder='Email' type="email" disabled value={userInfo.email} className='rounded-lg p-6 bg-[#2c2e3b]'/>
+              <input placeholder='Email' type="email" disabled value={userInfo.email} className='rounded-lg p-6 bg-[#2c2e3b] border-none'/>
             </div>
           </div>
         </div>
