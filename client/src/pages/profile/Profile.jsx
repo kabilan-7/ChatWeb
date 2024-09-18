@@ -3,8 +3,9 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import {IoArrowBack} from 'react-icons/io5'
 import { Avatar, AvatarImage } from '@radix-ui/react-avatar'
-import { getColor } from '@/lib/utils'
+import { colors, getColor } from '@/lib/utils'
 import {FaTrash,FaPlus} from 'react-icons/fa'
+import { Key } from 'lucide-react'
 const Profile = () => {
   const navigate=useNavigate()
   const {userInfo,setUserInfo} = useAppStore()
@@ -35,6 +36,17 @@ const Profile = () => {
           <div className='flex min-w-32 md:min-w-64 flex-col gap-5 text-white items-center justify-center'>
             <div className='w-full'>
               <input placeholder='Email' type="email" disabled value={userInfo.email} className='rounded-lg p-6 bg-[#2c2e3b] border-none'/>
+            </div>
+            <div className='w-full'>
+              <input placeholder='First Name' type="text"  value={firstName} className='rounded-lg p-6 bg-[#2c2e3b] border-none' onChange={(e)=>setFirstName(e.target.value)}  />
+            </div>
+            <div className='w-full'>
+              <input placeholder='Second Name' type="text"  value={lastName} className='rounded-lg p-6 bg-[#2c2e3b] border-none' onChange={(e)=>setLastName(e.target.value)} />
+            </div>
+            <div className='w-full flex gap-5'>
+              {
+                colors.map((color,index)=>(<div className={`${color} h-8 w-8 rounded-full cursor-pointer transition-all duration-300 ${selectedColor===index?" outline outline-white/50 outline-3":"" }`} key={index} onClick={()=>setSelectedColor(index)}></div>))
+              }
             </div>
           </div>
         </div>
