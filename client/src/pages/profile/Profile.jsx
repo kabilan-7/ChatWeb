@@ -19,7 +19,6 @@ const Profile = () => {
   const [hovered,setHovered]=useState(false)
   const [selectedColor,setSelectedColor]=useState(0)
   useEffect(()=>{
-    console.log(userInfo)
    if(userInfo.profileSetup) 
    {
     setFirstName(userInfo.firstName)
