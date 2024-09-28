@@ -13,6 +13,7 @@ app.use(cors({
     methods:["GET","POST","PUT","PATCH","DELETE"],
     credentials:true,
 }))
+app.use("/uploads/profiles",express.static('uploads/profile'))
 app.use(cookieParser())
 app.use(express.json())
 
