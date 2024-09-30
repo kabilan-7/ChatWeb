@@ -130,23 +130,20 @@ export const addProfileImage = async (req,res,next)=>{
 
 export const removeProfileImage = async (req,res,next)=>{
   try{
-    const {userId}=req
-    const {firstName,lastName,color}=req.body
-    if(!firstName || !lastName || !color){
-      return res.status(400).send("firstname,lastname and color is required")
+    const {userId} = req
+    const user = User.findById(userId) 
+    if(!user){
+      return res.status(404).send("User not found")
     }
+    if(user.image){
+      unlinkSync(user.image)
+    }
+    user.image=null
+    await user.save()
     const userData = await User.findByIdAndUpdate(userId,{
       firstName,lastName,color,profileSetup:true
     },{new:true,runValidators:true})
-    return res.status(200).json({
-       id:userData.id,
-       email:userData.email,
-       profileSetup:userData.profileSetup,
-       firstName:userData.firstName,
-       lastName:userData.lastName,
-       image:userData.image,
-       color:userData.color
-    })
+    return res.status(200).send("Profile image removed successfully.")
    }catch(err){
       console.log({err})
       res.status(500).send("Internal server error")

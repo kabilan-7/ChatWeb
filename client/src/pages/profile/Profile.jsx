@@ -27,7 +27,10 @@ const Profile = () => {
     setLastName(userInfo.lastName)
     setSelectedColor(userInfo.color)
    }
-   
+   if(userInfo.image){
+    setImage(`${HOST}/${userInfo.image}`)
+    console.log(image)
+   }
   },[userInfo])
   const validateProfile = ()=>{
     if(!firstName){
@@ -66,7 +69,6 @@ const Profile = () => {
   }
   const handleImageChange = async(event)=>{
     const file=event.target.files[0]
-    console.log({file})
     if(file){
       const formData=new FormData()
       formData.append("profile-image",file)
