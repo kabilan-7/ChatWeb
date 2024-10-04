@@ -2,6 +2,13 @@ import React from 'react'
 import { Avatar, AvatarImage } from '@radix-ui/react-avatar'
 import { useAppStore } from '@/store'
 import { getColor } from '@/lib/utils'
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip"
+
 const ProfileInfo = () => {
     const {userInfo} = useAppStore()
   return (
@@ -20,6 +27,17 @@ const ProfileInfo = () => {
                 userInfo.firstName && userInfo.lastName ? `${userInfo.firstName} ${userInfo.lastName}`: ""
             }
          </div>
+      </div>
+      <div className="flex gap-5">
+      <TooltipProvider>
+  <Tooltip>
+    <TooltipTrigger>Hover</TooltipTrigger>
+    <TooltipContent>
+      <p>Add to library</p>
+    </TooltipContent>
+  </Tooltip>
+</TooltipProvider>
+
       </div>
     </div>
   )
