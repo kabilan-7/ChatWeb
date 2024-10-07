@@ -5,6 +5,7 @@ import cookieParser from 'cookie-parser';
 import path from 'path';
 import { connectdb } from './config/db.js';
 import authRoute from './routes/authRoute.js';
+import contactRoutes from './routes/contactsRoute.js';
 
 dotenv.config();
 const app = express();
@@ -23,6 +24,7 @@ app.use("/uploads/profiles", express.static(path.resolve('uploads/profiles')));
 app.use(cookieParser());
 app.use(express.json());
 app.use("/api/auth", authRoute);
+app.use("/api/contacts",contactRoutes)
 
 connectdb();
 
