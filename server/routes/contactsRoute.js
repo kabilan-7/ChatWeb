@@ -1,6 +1,6 @@
 import express from 'express'
-import { verifyToken } from '../middlewares/authMiddleware'
-import { searchContacts } from '../controllers/contactsController'
+import { verifyToken } from '../middlewares/authMiddleware.js'
+import { searchContacts } from '../controllers/contactsController.js'
 
 const contactRoutes = express.Router()
 contactRoutes.post('/search',verifyToken,searchContacts)
