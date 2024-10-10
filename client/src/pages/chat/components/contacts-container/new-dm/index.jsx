@@ -15,13 +15,22 @@ import {
 } from "@/components/ui/dialog"
 import { animationDefaultOptions } from '@/lib/utils'
 import Lottie from 'react-lottie'
+import { apiClient } from '@/lib/api-client'
+import { SEARCH_CONTACTS_ROUTES } from '@/utils/constants'
 
 
 const NewDM = () => {
   const [openNewContactModal,setOpenNewContactModal] = useState(false)
   const [searchedContacts,setSearchedContacts] = useState([])
-  const searchContacts = async(search)=>{
-
+  const searchContacts = async(searchTerm)=>{
+       if(searchTerm.length > 0){
+         const response = await apiClient.post(SEARCH_CONTACTS_ROUTES, {searchTerm}, {withCredentials:true})
+         if(response.status == 200 && response.data.contacts){
+            setSearchedContacts(response.data.contacts)
+         }
+       }else{
+        setSearchedContacts([])
+       }
   }
   return (
     <>
@@ -48,7 +57,7 @@ const NewDM = () => {
       <input placeholder='Search Contacts' className='rounded-lg p-4 bg-[#2c2e3b] border-none' onChange={e=>searchContacts(e.target.value)} />
     
     {
-      searchedContacts<=0 && (
+      (searchedContacts<=0) && (
         <div className='flex-1  md:flex flex-col justify-center items-center  duration-1000 transition-all'>
         <Lottie isClickToPauseDisabled={true} height={100} width={100} options={animationDefaultOptions}/>
         <div className='text-opacity-80 text-white flex flex-col gap-5 items-center mt-5 lg:text-2xl text-3xl transition-all duration-300 text-center'>

@@ -9,7 +9,7 @@ export const searchContacts = async (req,res,next)=>{
 
       const contacts = await User.find({
          $and:[
-            {_id:{$ne:requestAnimationFrame.userId}},
+            {_id:{$ne:req.userId}},
             {
                $or:[{firstName: regex},{lastName:regex},{email:regex}]
             }

@@ -10,4 +10,4 @@ export const REMOVE_PROFILE_IMAGE_ROUTE = `${AUTH_ROUTE}/remove-profile-image`
 export const LOGOUT_ROUTE = `${AUTH_ROUTE}/logout`
 
 const CONTACTS_ROUTE = "api/contacts"
-export const SEARCH_CONTACTS_ROUTES = `${AUTH_ROUTE}/search`
+export const SEARCH_CONTACTS_ROUTES = `${CONTACTS_ROUTE}/search`
