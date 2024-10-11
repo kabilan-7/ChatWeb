@@ -57,7 +57,7 @@ const NewDM = () => {
       <input placeholder='Search Contacts' className='rounded-lg p-4 bg-[#2c2e3b] border-none' onChange={e=>searchContacts(e.target.value)} />
     
     {
-      (searchedContacts<=0) && (
+      searchedContacts.length<=0 && (
         <div className='flex-1  md:flex flex-col justify-center items-center  duration-1000 transition-all'>
         <Lottie isClickToPauseDisabled={true} height={100} width={100} options={animationDefaultOptions}/>
         <div className='text-opacity-80 text-white flex flex-col gap-5 items-center mt-5 lg:text-2xl text-3xl transition-all duration-300 text-center'>
