@@ -6,6 +6,7 @@ import path from 'path';
 import { connectdb } from './config/db.js';
 import authRoute from './routes/authRoute.js';
 import contactRoutes from './routes/contactsRoute.js';
+import setupSocket from './socket.js';
 
 dotenv.config();
 const app = express();
@@ -28,6 +29,8 @@ app.use("/api/contacts",contactRoutes)
 
 connectdb();
 
-app.listen(port, () => {
+const server = app.listen(port, () => {
     console.log(`The server is running at http://localhost:${port}`);
 });
+
+setupSocket(server)

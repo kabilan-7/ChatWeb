@@ -18,7 +18,7 @@ const ChatHeader = () => {
                 </div>)}
                </Avatar>
              </div>
-             <div>{selectedChatType === "contact" && `${selectedChatData.firstName} ${selectedChatData.lastName}`}</div>
+             <div>{selectedChatType === "contact" && selectedChatData.firstName ? `${selectedChatData.firstName} ${selectedChatData.lastName}` : selectedChatData.email }</div>
               </div> 
                 <div className="flex items-center justify-center gap-5">
                     <button className='text-neutral-500 focus:border-none focus:outline-none focus:text-white duration-300 transition-all' onClick={closeChat} >
