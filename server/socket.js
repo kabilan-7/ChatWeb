@@ -8,16 +8,17 @@ const setupSocket = (server) =>{
         credentials:true,
         }
     })
-    const disconnect = (socket) =>{
+    const disconnect = (socket) =>{  //disconnect method
         console.log(`Client discoonnected:${socket.id}`)
         for(const [userId,socketId] of userSocketMap.entries()){
             if(socketId == socket.id){
             userSocketMap.delete(userId)
+            break
             }
         }
     }
     const userSocketMap = new Map()
-    io.on("connection",(socket)=>{
+    io.on("connection",(socket)=>{ //make connection
         const userId = socket.handshake.query.userId
         if(userId){
             userSocketMap.set(userId,socket.id)
@@ -25,7 +26,7 @@ const setupSocket = (server) =>{
         }else{
             console.log("User id not provided during connection")
         }
-        socket.on("disconnect",()=> disconnect())
+        socket.on("disconnect",()=> disconnect(socket))
     })
 }
 

@@ -20,6 +20,16 @@ export const SocketProvider = ({children}) => {
             socket.current.on('connect',()=>{
                 console.log("Connected to socket server")
             })
+            return ()=>{
+                socket.current.disconnect()
+            }
         }
-    },)
+        
+    },[userInfo])
+    return (
+        <SocketContext.Provider value = {socket.current} >
+            {children}
+        </SocketContext.Provider>
+    )
+    
 }
