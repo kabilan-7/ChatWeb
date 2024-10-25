@@ -1,5 +1,5 @@
 import { Server as SocketIOServer } from "socket.io"
-
+import Message from "./models/messageModel.js"
 const setupSocket = (server) =>{
     const io = new SocketIOServer(server,{
         cors:{ 
@@ -9,13 +9,20 @@ const setupSocket = (server) =>{
         }
     })
     const disconnect = (socket) =>{  //disconnect method
-        console.log(`Client discoonnected:${socket.id}`)
+        console.log(`Client disconnected:${socket.id}`)
         for(const [userId,socketId] of userSocketMap.entries()){
-            if(socketId == socket.id){
+            if(socketId === socket.id){
             userSocketMap.delete(userId)
             break
             }
         }
+    }
+    const sendMessage = async(message) => {
+        const senderSocketId = userSocketMap.get(message.sender)
+        const recipientSocketId = userSocketMap.get(message.recipient)
+        const createdMessage = await Message.create(message)
+        const messageData = await Message.findById(createdMessage._id).populate("sender","id")
+        
     }
     const userSocketMap = new Map()
     io.on("connection",(socket)=>{ //make connection
@@ -26,6 +33,7 @@ const setupSocket = (server) =>{
         }else{
             console.log("User id not provided during connection")
         }
+        socket.on("sendMessage",sendMessage)
         socket.on("disconnect",()=> disconnect(socket))
     })
 }
